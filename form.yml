@@ -4,20 +4,8 @@ form:
   - version
   - bc_account
   - bc_num_hours
-  - num_cores
   - bc_email_on_started
 attributes:
-  num_cores:
-    widget: "number_field"
-    label: "Number of cores"
-    value: 1
-    help: |
-      Number of cores on node type (4 GB per core unless requesting whole
-      node). Leave blank if requesting full node.
-    min: 0
-    max: 28
-    step: 1
-    id: 'num_cores'
   bc_account:
     label: "Project"
     help: "You can leave this blank if **not** in multiple projects."
