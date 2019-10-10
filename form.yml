@@ -4,7 +4,6 @@ form:
   - version
   - bc_account
   - bc_num_hours
-  - node_type
   - num_cores
   - bc_email_on_started
 attributes:
