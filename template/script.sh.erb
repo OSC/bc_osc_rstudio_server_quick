@@ -9,7 +9,7 @@ setup_env () {
   #   SINGULARITY_BINDPATH="/usr/local,/etc/profile.d/lmod.sh,/usr/share/lmod,/opt/intel,/opt/mvapich2,/usr/lib64"
   #   RSTUDIO_SERVER_IMAGE="/usr/local/project/ondemand/singularity/rstudio/rstudio_launcher_centos7.simg"
   #   PATH="$PATH:/path/to/R:/path/to/rstudio/rserver"
- 
+
   # SINGULARITY_BINDPATH is being used to bind all RStudio's requirements from
   # the host into the guest, and so those values may vary between sites.
 
@@ -51,11 +51,19 @@ cd "${HOME}"
 # Output debug info
 module list
 
+# Remove once module is updated
+export SINGULARITY_HOME="$HOME"
+export SINGULARITY_BINDPATH="/dev,/etc,/fs/project,/fs/scratch,/media,/mnt,/opt,/proc,/srv,/sys,/usr,/var"
+
 set -x
 # Launch the RStudio Server
 echo "Starting up rserver..."
 
-singularity run -B "$TMPDIR:/tmp" "$RSTUDIO_SERVER_IMAGE" \
+# --contain is used to override the bindpaths specified in OSC's
+# singularity.conf which would otherwise conflict in /etc
+# using --contain requires us to bind mount in addition directories including
+# /dev and /proc
+singularity run --contain -B "$TMPDIR:/tmp" "$RSTUDIO_SERVER_IMAGE" \
  --www-port "${port}" \
  --auth-none 0 \
  --auth-pam-helper-path "${RSTUDIO_AUTH}" \

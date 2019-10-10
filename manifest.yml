@@ -1,10 +1,10 @@
 ---
-name: RStudio Server
+name: RStudio Server (Owens Quick)
 category: Interactive Apps
 subcategory: Servers
 role: batch_connect
 description: |
-  This app will launch [RStudio Server] an IDE for [R] on the [Owens cluster].
+  This app will launch [RStudio Server] an IDE for [R] on a single core on a shared and potentially oversubscribed node of the [Owens cluster].
 
   [RStudio Server]: https://www.rstudio.com/products/rstudio-server/
   [R]: https://www.r-project.org/
